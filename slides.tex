@@ -462,7 +462,7 @@ a plain array or two arrays that will eventually be concatenated.
 (define fission-map
   (lambda (f arr)
     (match arr
-      [`(push ,f ,len)
+      [`(pull ,g ,len)
        (match-let ([`(,a ,b) (split arr)])
          `(concat ,(map f a) ,(map f b)))]
       [`(concat ,a ,b)
@@ -494,7 +494,7 @@ of a fold on a pull array.
 (define fission-fold
   (lambda (f init arr)
     (match arr
-      [`(push ,g ,len)
+      [`(pull ,g ,len)
        (match-let ([`(,a ,b) (split arr)])
          (f (fold f init a) (fold f init b)))]
       [`(concat ,a ,b)
@@ -505,7 +505,7 @@ of a fold on a pull array.
 \begin{frame}
   \frametitle{Ongoing Work}
   We are still experimenting with fissioning in Accelerate. \\
-  See: {\em Converting Data-Parallelism to Task-Parallelism by Rewrites} in FHPC 2015.
+  \hyperlink{http://dl.acm.org/citation.cfm?id=2808093}{See: {\em Converting Data-Parallelism to Task-Parallelism by Rewrites} in FHPC 2015.}
 \end{frame}
 
 \end{document}
